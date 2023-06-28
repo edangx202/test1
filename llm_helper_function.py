@@ -68,3 +68,12 @@ def create_vectordatabase(docs, openai_api_key):
     embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
     db = FAISS.from_documents(docs, embeddings)
     return db
+
+def convert_to_markdown(text):
+    lines = text.strip().split('\n')
+    markdown = ""
+    for num, line in enumerate(lines):
+        line = line.strip().lstrip('1234567890.- ')
+        if line:
+            markdown += f"{num+1}. {line}\n"
+    return markdown
