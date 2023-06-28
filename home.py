@@ -23,15 +23,6 @@ st.markdown("MCQ Question Preperation Aid is a tool that helps you to generate q
 # load_dotenv()
 # openai_api_key = os.environ.get('OPENAI_API_KEY')
 
-# prompt_template = """Use the context below to write an answer to the question.:
-#     Context: {context}
-#     Question: {topic}
-#     Answer:"""
-
-# PROMPT = PromptTemplate(
-#     template=prompt_template, input_variables=["context", "topic"]
-# )
-
 # Initialization of session states
 # Since Streamlit always reruns the script when a widget changes, we need to initialize the session states
 if 'questions' not in st.session_state:
@@ -44,9 +35,6 @@ def get_api_key():
     return input_text
 
 openai_api_key = get_api_key()
-
-# with st.container():
-#     st.markdown("Make sure you've entered your OpenAI API Key. Don't have an API key yet? Read [this](https://www.howtogeek.com/885918/how-to-get-an-openai-api-key/) article on how to get an API key.")
 
 # Let user upload a file
 uploaded_file = st.file_uploader("Choose a file", type=['pdf'])
@@ -111,8 +99,6 @@ if uploaded_file is not None:
 
             with st.form('my_form'):
                 # Let the user select questions, which will be used to generate answers
-                
-                # st.session_state['questions_to_answers'] = st.multiselect("Select questions to answer", st.session_state['questions_list'])
                 st.session_state['questions_to_answers'] = st.multiselect("Select questions to create answers", st.session_state['questions_list'])
                 
                 submitted = st.form_submit_button('Generate answers')
@@ -135,11 +121,11 @@ if uploaded_file is not None:
                             st.info(f"Correct Answer:\n  {answer} ")
 
                             # Generate wrong answers
-                            arguments2 = {
+                            arguments = {
                                 "question": question,
                                 "correct_ans": answer,
                             }
-                            wrong_answers = chain_wrongAns.run(arguments2)
+                            wrong_answers = chain_wrongAns.run(arguments)
                             markdown = convert_to_markdown(wrong_answers)
                             st.info(f"Wrong Answer:\n  {markdown} ")
                 
