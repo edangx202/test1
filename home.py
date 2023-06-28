@@ -23,14 +23,14 @@ st.markdown("MCQ Question Preperation Aid is a tool that helps you to generate q
 # load_dotenv()
 # openai_api_key = os.environ.get('OPENAI_API_KEY')
 
-prompt_template = """Use the context below to write an answer to the question.:
-    Context: {context}
-    Question: {topic}
-    Answer:"""
+# prompt_template = """Use the context below to write an answer to the question.:
+#     Context: {context}
+#     Question: {topic}
+#     Answer:"""
 
-PROMPT = PromptTemplate(
-    template=prompt_template, input_variables=["context", "topic"]
-)
+# PROMPT = PromptTemplate(
+#     template=prompt_template, input_variables=["context", "topic"]
+# )
 
 # Initialization of session states
 # Since Streamlit always reruns the script when a widget changes, we need to initialize the session states
